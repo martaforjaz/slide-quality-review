@@ -91,3 +91,7 @@ python render_holdout.py
 ```
 
 The folder report shows original and combined alerts side by side. Both methods read the same sampled windows. The combined score applies the public TCGA@Focus model to 64-pixel subtiles within each window, and the CSV marks regions flagged by either method along with their coordinates and scores. The TCGA patch benchmark does not validate this application across WSI scanners and magnifications. Use the paired previews for manual review.
+
+## Aggregate comparison on a separate WSI batch
+
+Across seven 40× slides, the original detector flagged **18 of 255** sampled tissue regions. The combined detector flagged **98 of the same 255**, including all 18 original alerts. These slides had no reference focus annotations. The counts measure review workload and agreement between the detectors.
