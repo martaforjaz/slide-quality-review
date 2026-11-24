@@ -1,7 +1,8 @@
 """Desktop entry point for private slide folders."""
 from pathlib import Path
 from queue import Empty, Queue
-from tempfile import mkdtemp
+import hashlib
+import os
 from threading import Thread
 from tkinter import Button, Entry, Label, StringVar, Tk, filedialog
 import webbrowser
@@ -40,8 +41,10 @@ def review():
 
     def process():
         try:
-            location = Path(mkdtemp(prefix="slide-quality-review-"))
-            done, errors = report(Path(value).expanduser(), location)
+            source = Path(value).expanduser().resolve()
+            key = hashlib.sha256(str(source).encode()).hexdigest()[:16]
+            location = Path(os.getenv("LOCALAPPDATA", Path.home())) / "SlideQualityReview" / key
+            done, errors = report(source, location)
             results.put((location, f"{done} slides reviewed. {errors} unreadable."))
         except (ValueError, OSError) as exc:
             results.put((None, str(exc)))

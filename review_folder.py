@@ -1,10 +1,14 @@
 """Read a folder of slides locally and render a coordinate-preserving QA report."""
 import argparse
+import hashlib
 import csv
 import json
 from html import escape
 from pathlib import Path
 import sys
+from time import perf_counter
+
+import psutil
 
 import numpy as np
 import openslide
@@ -114,53 +118,107 @@ def inspect(path, output, stem):
             if old or new or score is None:
                 highlights.append((x, y, window, level, round(energy / baseline, 5) if baseline else "",
                                    old, "" if score is None else new, round(score, 5) if score is not None else ""))
+        for hit in highlights:
+            x, y, window = hit[:3]
+            # Preserve the physical extent even when scoring used a lower pyramid level.
+            slide.read_region((x, y), 0, (window, window)).save(output / crop_name(stem, x, y))
         legacy.save(output / f"{stem}-original-alerts.png")
         combined.save(output / f"{stem}-alerts.png")
         return len(sampled), highlights, level, single
 
 
-def report(folder, output):
+def crop_name(stem, x, y):
+    return f"{stem}-region-{x}-{y}.png"
+
+
+def save_json(path, value):
+    temp = path.with_suffix(".tmp")
+    temp.write_text(json.dumps(value, indent=2), encoding="utf-8")
+    temp.replace(path)
+
+
+def report(folder, output, limit=None):
     if not folder.is_dir():
         raise ValueError("Folder unavailable. Check the path and your network access.")
     output.mkdir(parents=True, exist_ok=True)
-    cards, errors, results = [], [], []
-    for index, path in enumerate(sorted(folder.iterdir())):
+    checkpoint = output / "checkpoint.json"
+    pipeline = hashlib.sha256(Path(__file__).read_bytes() + json.dumps(MODEL, sort_keys=True).encode()).hexdigest()
+    state = json.loads(checkpoint.read_text(encoding="utf-8")) if checkpoint.exists() else {}
+    if state and state["folder"] != str(folder.resolve()):
+        raise ValueError("The output already belongs to a different input folder.")
+    if not state or state["pipeline"] != pipeline:
+        state = {"folder": str(folder.resolve()), "pipeline": pipeline, "slides": {}}
+    process = psutil.Process()
+    cached = state["slides"]
+    cards, errors, results, regions = [], [], [], []
+    reused = processed = 0
+    for path in sorted(folder.iterdir()):
         if not path.is_file() or path.suffix.lower() not in EXTENSIONS:
             continue
-        stem = f"slide-{index:04}"
-        try:
-            count, hits, level, sampled_map = inspect(path, output, stem)
-        except (OSError, openslide.OpenSlideError) as exc:
-            errors.append(f"{path.name}: {exc}")
-            continue
+        stat = path.stat()
+        signature = [stat.st_size, stat.st_mtime_ns]
+        slide_id = hashlib.sha256(path.name.encode()).hexdigest()[:16]
+        version = hashlib.sha256(json.dumps([signature, pipeline]).encode()).hexdigest()[:12]
+        stem = f"slide-{slide_id}-{version}"
+        record = cached.get(path.name)
+        if record and record["signature"] == signature and (output / f"{stem}-alerts.png").exists():
+            reused += 1
+        else:
+            if limit is not None and processed >= limit:
+                break
+            started = perf_counter()
+            before = process.io_counters()
+            try:
+                data = inspect(path, output, stem)
+            except (OSError, openslide.OpenSlideError) as exc:
+                errors.append(f"{path.name}: {exc}")
+                continue
+            after = process.io_counters()
+            memory = process.memory_info()
+            peak = getattr(memory, "peak_wset", getattr(memory, "peak_rss", None))
+            record = dict(signature=signature, data=data, seconds=round(perf_counter()-started, 3),
+                          read_bytes=after.read_bytes-before.read_bytes, rss_bytes=memory.rss, peak_rss_bytes=peak)
+            cached[path.name] = record
+            save_json(checkpoint, state)
+            processed += 1
+        count, hits, level, sampled_map = record["data"]
         original = sum(hit[5] for hit in hits)
         combined = sum(hit[6] is True for hit in hits)
         overlap = sum(hit[5] and hit[6] is True for hit in hits)
-        missing = sum(hit[6] == "" for hit in hits)
-        label = (f"Original: {original} | Combined: {combined} | Both: {overlap} | Tissue samples: {count} | Combined unscored: {missing}" if count
-                 else "No eligible tissue samples")
+        label = f"Original: {original} | Combined: {combined} | Both: {overlap} | Tissue samples: {count}"
         preview_kind = "sampled tile map" if sampled_map else "slide thumbnail"
-        print(f"Reviewed slide {len(cards)+1}: {original} original, {combined} combined, {overlap} shared / {count} tissue samples; {missing} unscored", flush=True)
-        cards.append((combined, f'<article><h2>{escape(path.name)}</h2><p>{label} · pyramid level {level}</p>'
-                      f'<a href="{stem}.png">PNG without alerts</a><div class="pair"><div><h3>Original</h3><a href="{stem}-original-alerts.png"><img loading="lazy" src="{stem}-original-alerts.png" alt="Original detector alerts"></a></div><div><h3>Combined</h3><a href="{stem}-alerts.png"><img loading="lazy" src="{stem}-alerts.png" alt="Combined detector alerts"></a></div></div></article>'))
+        print(f"Reviewed slide {len(cards)+1}: {label}", flush=True)
         safe_name = "'" + path.name if path.name.startswith(("=", "+", "-", "@", "\t", "\r")) else path.name
-        results.extend((safe_name, count, *hit) for hit in hits)
+        region_links = []
+        for hit in hits:
+            x, y = hit[:2]
+            results.append((safe_name, count, *hit))
+            if hit[5] or hit[6] is True:
+                src = crop_name(stem, x, y)
+                regions.append(dict(id=src, slide=safe_name, x=x, y=y, original=hit[5], combined=hit[6] is True))
+                region_links.append(f'<li><a href="#{src}">Region ({x}, {y}) at native resolution</a></li>')
+        cards.append((combined, f'<article><h2>{escape(path.name)}</h2><p>{label} | Pyramid level {level} | {preview_kind}</p>'
+                      f'<a href="{stem}.png">PNG without alerts</a><div class="pair"><div><h3>Original</h3><img loading="lazy" src="{stem}-original-alerts.png" alt="Original detector alerts"></div><div><h3>Combined</h3><img loading="lazy" src="{stem}-alerts.png" alt="Combined detector alerts"></div></div>'
+                      f'<ul>{"".join(region_links)}</ul></article>'))
     with (output / "alerts.csv").open("w", newline="", encoding="utf-8-sig") as file:
         writer = csv.writer(file)
         writer.writerow(("slide", "tissue_samples", "level0_x", "level0_y", "level0_window", "read_level", "focus_ratio", "original_alert", "combined_alert", "combined_score"))
         writer.writerows(results)
+    save_json(output / "run-metrics.json", dict(processed=processed, reused=reused, slides=[
+        {k:v for k,v in row.items() if k not in {"signature","data"}} for row in cached.values()
+    ]))
     body = "".join(card for _, card in sorted(cards, key=lambda item: -item[0]))
     failures = "".join(f"<li>{escape(error)}</li>" for error in errors)
+    review = (Path(__file__).parent / "review_panel.html").read_text(encoding="utf-8")
+    review = review.replace("REGION_DATA", json.dumps(regions, ensure_ascii=True).replace("<", "\\u003c"))
     (output / "index.html").write_text(
         '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width">'
         '<title>Slide review report</title><style>body{max-width:1000px;margin:2rem auto;padding:0 1rem;'
         'font:16px system-ui;color:#142d50}img{display:block;width:min(100%,850px);margin:1rem 0}'
-        ' .pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}article{border-top:1px solid #cbd9e8;margin-top:1.5rem}</style>'
+        '.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}article{border-top:1px solid #cbd9e8;margin-top:1.5rem}</style>'
         '<h1>Slide review</h1><a href="alerts.csv">Download alerts CSV</a>'
-        f'<p>{len(cards)} slides reviewed · {len(errors)} unreadable</p>'
-        '<p>Orange outlines show suspicious sampled regions. Review at full resolution before deciding. The combined detector was trained on public patches and these slides have no reference focus labels.</p>'
-        + body + (f"<h2>Unreadable slides</h2><ul>{failures}</ul>" if errors else "")
-        + ("<p>No compatible slides were opened.</p>" if not cards else ""),
+        f'<p>{len(cards)} slides reviewed | {processed} processed | {reused} resumed | {len(errors)} unreadable</p>'
+        + review + body + (f"<h2>Unreadable slides</h2><ul>{failures}</ul>" if errors else ""),
         encoding="utf-8",
     )
     return len(cards), len(errors)
@@ -170,9 +228,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("folder", type=Path)
     parser.add_argument("--output", type=Path, default=Path("slide-review-output"))
+    parser.add_argument("--max-slides", type=int, help="Process at most this many new slides, then stop safely")
     args = parser.parse_args()
     try:
-        done, unreadable = report(args.folder, args.output)
+        done, unreadable = report(args.folder, args.output, args.max_slides)
     except (ValueError, OSError) as exc:
         sys.exit(str(exc))
     print(f"{done} slides reviewed, {unreadable} unreadable. Open {args.output / 'index.html'}.")

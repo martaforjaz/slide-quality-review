@@ -1,0 +1,71 @@
+{
+  "native": {
+    "original": {
+      "tp": 17,
+      "fp": 7,
+      "tn": 13,
+      "fn": 3,
+      "abstain": 0
+    },
+    "calibrated": {
+      "tp": 16,
+      "fp": 1,
+      "tn": 19,
+      "fn": 4,
+      "abstain": 0
+    },
+    "combined": {
+      "tp": 18,
+      "fp": 1,
+      "tn": 19,
+      "fn": 2,
+      "abstain": 0
+    }
+  },
+  "downsample_2": {
+    "original": {
+      "tp": 14,
+      "tn": 17,
+      "fp": 3,
+      "fn": 6,
+      "abstain": 0
+    },
+    "calibrated": {
+      "tp": 4,
+      "tn": 20,
+      "fp": 0,
+      "fn": 16,
+      "abstain": 0
+    },
+    "combined": {
+      "tp": 9,
+      "tn": 20,
+      "fp": 0,
+      "fn": 11,
+      "abstain": 0
+    }
+  },
+  "downsample_4": {
+    "original": {
+      "tp": 9,
+      "tn": 19,
+      "fp": 1,
+      "fn": 11,
+      "abstain": 0
+    },
+    "calibrated": {
+      "tp": 0,
+      "tn": 20,
+      "fp": 0,
+      "fn": 20,
+      "abstain": 0
+    },
+    "combined": {
+      "tp": 4,
+      "tn": 20,
+      "fp": 0,
+      "fn": 16,
+      "abstain": 0
+    }
+  }
+}

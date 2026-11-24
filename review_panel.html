@@ -1,0 +1,46 @@
+<section id="region-review" hidden><h2>Review a region</h2><p id="region-title"></p>
+<a id="native" target="_blank" rel="noopener"><img id="region-image" alt="Native-resolution tissue region"></a>
+<label>Decision <select id="decision"><option value="">Pending</option><option>Accept</option><option>Rescan</option><option>Manual review</option></select></label>
+<button id="next">Next region</button> <button id="download-review">Save review JSON</button> <button id="download-rescan">Export rescan CSV</button>
+<label>Reopen review <input type="file" id="restore-review" accept=".json"></label><p id="review-status" role="status"></p></section>
+<script>
+const regions=REGION_DATA, panel=document.querySelector("#region-review");
+const node=id=>document.getElementById(id);
+const storage="slide-review:"+location.pathname;
+let decisions={}, active=0;
+try { decisions=JSON.parse(localStorage.getItem(storage)||"{}"); } catch {}
+function remember(){try{localStorage.setItem(storage,JSON.stringify(decisions));}catch{}}
+function view(){
+  if(!regions.length)return;
+  panel.hidden=false;
+  const i=regions.findIndex(row=>"#"+row.id===location.hash);
+  if(i>=0)active=i;
+  const row=regions[active];
+  node("region-title").textContent=row.slide+" | level-zero coordinates ("+row.x+", "+row.y+")";
+  node("native").href=node("region-image").src=row.id;
+  node("decision").value=decisions[row.id]||"";
+  node("next").disabled=active===regions.length-1;
+  if(i>=0) panel.scrollIntoView();
+}
+function download(name,value,type){
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([value],{type}));a.download=name;a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+node("decision").onchange=e=>{decisions[regions[active].id]=e.target.value;remember();};
+node("next").onclick=()=>{if(active+1<regions.length) location.hash=regions[active+1].id;};
+node("download-review").onclick=()=>download("review.json",JSON.stringify(decisions,null,2),"application/json");
+node("download-rescan").onclick=()=>{
+  const rows=regions.filter(r=>decisions[r.id]==="Rescan");
+  const values=rows.map(r=>['"'+r.slide.replaceAll('"','""')+'"',r.x,r.y].join(","));
+  download("rescan.csv",["slide,level0_x,level0_y",...values].join("\r\n"),"text/csv");
+};
+node("restore-review").onchange=async e=>{
+  try{
+    const saved=JSON.parse(await e.target.files[0].text());
+    decisions=Object.fromEntries(regions.filter(r=>["Accept","Rescan","Manual review"].includes(saved[r.id])).map(r=>[r.id,saved[r.id]]));
+    remember();view();node("review-status").textContent="Review restored.";
+  }catch{node("review-status").textContent="Could not read review JSON.";}
+};
+window.addEventListener("hashchange",view);view();
+</script>

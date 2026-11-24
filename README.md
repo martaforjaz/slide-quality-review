@@ -57,7 +57,7 @@ The browser tool accepts exported PNG and JPEG tiles or raster previews. Scanner
 Download the repository and run these commands on the computer that can already open the slide folder. On Windows, paste the full UNC path beginning with two backslashes in the desktop window, or use **Browse**. Select **Review folder** to open the report.
 
 ```sh
-pip install openslide-python openslide-bin numpy Pillow
+pip install openslide-python openslide-bin numpy Pillow psutil
 python desktop.py
 ```
 
@@ -107,3 +107,23 @@ On the public **MY_P.tiff** whole slide, the original detector flagged **11 of 1
 [Public example CSV](figures/plism-alerts.csv). Download MY_P.tiff from the [PLISM Original Whole Slide Images Dataset](https://doi.org/10.25452/figshare.plus.24988074.v1) and run `python review_folder.py PATH_TO_PLISM_FOLDER --output plism-report` to regenerate the previews and CSV.
 
 Image source: Mieko Ochi, Daisuke Komura and colleagues, PLISM, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The figures show reduced views with added focus-alert outlines.
+
+
+## Review decisions and recovery
+
+[Open the public PLISM review session](https://martaforjaz.github.io/slide-quality/public-review/).
+Select an alert to inspect its region at level-zero resolution. Record a decision and move to the next alert. Decisions persist in the current browser. Download the review JSON to reopen it elsewhere or export the regions marked for rescanning as CSV.
+
+For a local folder, rerun the same command with the same output directory after an interruption. The scanner saves a checkpoint after each completed slide and reprocesses slides with changed inputs or detector code. Use one process per output directory. To pause after a known number of new slides, pass `--max-slides N`.
+
+`python test_resume.py` terminated a two-slide process after its first durable checkpoint. After restart, it reused one slide, processed the remaining slide and produced zero duplicate alert rows. See [recovery results](resume-results.json).
+
+The 145-region public PLISM example took 4.69 seconds for the slide processing step on one Windows run. The OS reported 37.3 MB of process reads and a 105 MB peak working set. The I/O counter is process-wide and does not measure TIFF payload or network traffic directly. See [run metrics](figures/plism-run-metrics.json).
+
+## Sensitivity to image resolution
+
+On the same 40 held-out TCGA@Focus patches (20 blurry and 20 clear), the combined detector found 18 blurry patches with 1 false alert at the original resolution. When width and height were halved, it found 9 with zero false alerts. At quarter size, it found 4 with zero false alerts. The original detector found 17, 14 and 9 blurry patches and produced 7, 3 and 1 false alerts, respectively.
+
+Use the combined result to prioritize review at the evaluated patch resolution. Lower-resolution inputs need separate calibration before using a low alert count as a sign of acceptable focus. Digital resizing isolates sensitivity to resolution on these patches. This experiment does not measure how focus detection transfers between scanners or estimate whole-slide sensitivity.
+
+See [all counts](resolution-results.json). With the held-out patch files in `cache/patches`, run `node evaluate_resolution.mjs` from the repository root to reproduce the comparison.
