@@ -51,3 +51,16 @@ python render_scanner.py
 ## Supported inputs
 
 The browser tool accepts exported PNG and JPEG tiles or raster previews. Scanner formats such as SVS, NDPI, MRXS and pyramidal OME-TIFF need a separate reader to extract tiles at a consistent magnification. Importing a downsampled screenshot of a whole slide cannot reveal focus defects at native resolution. The absolute threshold in this project is applied to the provided TCGA examples. User uploads use the local overlay, whose scores depend on stain, texture, compression and scale.
+
+## Review a WSI folder
+
+Download the repository and run these commands on the computer that can already open the slide folder. On Windows, paste the full UNC path beginning with two backslashes in the desktop window, or use **Browse**. Select **Review folder** to open the report.
+
+```sh
+pip install openslide-python openslide-bin numpy Pillow
+python desktop.py
+```
+
+For a saved report or scripted runs, use `python review_folder.py "PATH_TO_SLIDES" --output "PATH_TO_REPORT"`. The report stores a reduced PNG of each slide, a second PNG with suspicious sampled regions, and an alerts CSV with level-zero coordinates. Desktop runs create a separate local temporary report for each batch. Files are read locally with the current Windows account; nothing is uploaded to the portfolio.
+
+OpenSlide must recognize the scanner format. The reader selects a pyramid level near 10× when the objective is recorded, samples a bounded grid, and scores tissue regions. The PNG is a map for review. Sampling can miss small focus defects, and the WSI workflow has not been validated across scanner formats or on the private example folder.

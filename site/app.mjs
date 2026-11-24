@@ -42,7 +42,7 @@ function render(){
   if(active.source){
     const alert=scannerAlert(active);
     get("summary").textContent=(alert===null?"No eligible tissue":alert?"Patch-level focus alert":"No patch-level focus alert")
-      + " | Dataset label: "+active.source.label+". Overlay is a separate local contrast check.";
+      + " | Dataset label: "+active.source.label;
   }
   get("decision").disabled=false;get("decision").value=active.decision;
 }
@@ -75,7 +75,7 @@ get("files").onchange=e=>{void load([...e.target.files].slice(0,30).map(f=>({nam
 get("mode").onchange=render;
 get("threshold").oninput=()=>{get("value").textContent=limit().toFixed(2);render();};
 get("decision").onchange=e=>{active.decision=e.target.value;render();};
-get("toggle").onclick=()=>{overlay=!overlay;render();};
+get("toggle").onchange=e=>{overlay=e.target.checked;render();};
 get("export").onclick=()=>{
   const rowsForExport=rows.flatMap(row=>{
     const hits=flagged(row);
