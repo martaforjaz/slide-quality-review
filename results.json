@@ -1,0 +1,12 @@
+{
+  "reference": {
+    "tissue_tiles": 52,
+    "alerts": 0,
+    "inside_injected_region": 0
+  },
+  "defocus": {
+    "tissue_tiles": 52,
+    "alerts": 7,
+    "inside_injected_region": 7
+  }
+}

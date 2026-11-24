@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" role="img" aria-label="Microscopy tile grid with flagged focus regions and review decisions">
+<rect width="800" height="220" fill="#142d50"/>
+<rect x="150" y="42" width="198" height="136" rx="11" fill="#213f61" stroke="#9bbcd1" stroke-width="2"/>
+<path d="M167 140c37-66 63-64 81-47s28 48 84 4v62H167Z" fill="#c28caa"/>
+<path d="M167 74h165m-165 29h165m-165 29h165m-165 29h165M200 60v101m33-101v101m33-101v101m33-101v101" stroke="#e4b3ca" opacity=".7"/>
+<rect x="233" y="103" width="66" height="58" fill="#f1bc6c55" stroke="#f1bc6c" stroke-width="3"/>
+<path d="M363 110h85m-10-7 10 7-10 7" fill="none" stroke="#a6ccdf" stroke-width="3"/>
+<g fill="#213f61" stroke="#9bbcd1"><rect x="474" y="52" width="170" height="48" rx="8"/><rect x="474" y="121" width="170" height="48" rx="8"/></g>
+<path d="m491 75 8 8 15-16m-23 78h23m17-72h87m-87 70h62" fill="none" stroke="#94d6ca" stroke-width="3"/>
+</svg>
