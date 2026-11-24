@@ -63,7 +63,7 @@ python desktop.py
 
 For a saved report or scripted runs, use `python review_folder.py "PATH_TO_SLIDES" --output "PATH_TO_REPORT"`. The report stores a reduced PNG of each slide, a second PNG with suspicious sampled regions, and an alerts CSV with level-zero coordinates. Desktop runs create a separate local temporary report for each batch. Files are read locally with the current Windows account; nothing is uploaded to the portfolio.
 
-OpenSlide must recognize the scanner format. The reader selects a pyramid level near 10× when the objective is recorded, samples a bounded grid, and scores tissue regions. The PNG is a map for review. Sampling can miss small focus defects, and the WSI workflow has not been validated across scanner formats or on the private example folder.
+OpenSlide must recognize the scanner format. The reader selects a pyramid level near 10× when the objective is recorded, samples a bounded grid, and scores tissue regions. Large single-level TIFFs use a 12 × 12 map of sampled windows to avoid decoding the entire slide to make a thumbnail. Each map cell shows the corresponding sample rather than all the tissue between samples. The CSV always uses the original level-zero coordinates. Sampling can miss small focus defects, and the WSI workflow has not been validated across scanner formats or on the private example folder.
 
 ### Public folder example
 
