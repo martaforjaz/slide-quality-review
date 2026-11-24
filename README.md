@@ -64,3 +64,9 @@ python desktop.py
 For a saved report or scripted runs, use `python review_folder.py "PATH_TO_SLIDES" --output "PATH_TO_REPORT"`. The report stores a reduced PNG of each slide, a second PNG with suspicious sampled regions, and an alerts CSV with level-zero coordinates. Desktop runs create a separate local temporary report for each batch. Files are read locally with the current Windows account; nothing is uploaded to the portfolio.
 
 OpenSlide must recognize the scanner format. The reader selects a pyramid level near 10× when the objective is recorded, samples a bounded grid, and scores tissue regions. The PNG is a map for review. Sampling can miss small focus defects, and the WSI workflow has not been validated across scanner formats or on the private example folder.
+
+### Public folder example
+
+![Public microscopy TIFF sample with an alert over injected defocus](figures/public-tiff-alert.png)
+
+This example generates two tiled TIFFs from the public scikit-image micrograph: a reference and a copy with simulated blur in one grid cell. Run `pip install tifffile` and `python public_folder_example.py` to generate the input folder, PNG previews, HTML report and CSV locally. The [example CSV](figures/public-tiff-alerts.csv) reports the flagged region in level-zero coordinates. This checks the folder workflow on a controlled image; the TCGA@Focus experiment above evaluates real scanner defocus separately.
