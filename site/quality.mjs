@@ -23,3 +23,12 @@ export function csv(rows) {
   const cell=value=>'"'+String(value).replace(/^[=+\-@\t\r]/,"'$&").replaceAll('"','""')+'"';
   return rows.map(row=>row.map(cell).join(',')).join('\r\n');
 }
+export function patchEnergy(tiles) {
+  const values=tiles.map(tile=>tile.energy).sort((a,b)=>a-b);
+  return values.length ? values[Math.floor(values.length/2)] : null;
+}
+
+export function patchAlert(tiles, threshold) {
+  const energy=patchEnergy(tiles);
+  return energy===null ? null : energy<threshold;
+}

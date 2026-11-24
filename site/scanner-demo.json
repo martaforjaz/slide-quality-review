@@ -1,0 +1,23 @@
+{
+  "threshold": 85.78529009316861,
+  "examples": [
+    {
+      "src": "scanner-patch-06.png",
+      "organ": "Adrenal Gland",
+      "label": "Out of Focus",
+      "source_member": "TCGA@Focus/Image Patches Database/Out of Focus/Adrenal Gland/TCGA-OR-A5JL-01Z-00-DX2.2C12A8F7-C0CE-48DE-B007-9EBE72645512/patch_i_8688_j_26735.png"
+    },
+    {
+      "src": "scanner-patch-04.png",
+      "organ": "Adrenal Gland",
+      "label": "In Focus",
+      "source_member": "TCGA@Focus/Image Patches Database/In Focus/Adrenal Gland/TCGA-OR-A5JY-01A-03-TS3.379E24E0-0700-49C2-8B81-B5A1713BDF67/patch_i_14111_j_18348.png"
+    },
+    {
+      "src": "scanner-patch-07.png",
+      "organ": "Adrenal Gland",
+      "label": "Out of Focus",
+      "source_member": "TCGA@Focus/Image Patches Database/Out of Focus/Adrenal Gland/TCGA-OR-A5JR-01Z-00-DX5.688E9282-C734-4973-9121-0967BB83EBB6/patch_i_27618_j_54275.png"
+    }
+  ]
+}
