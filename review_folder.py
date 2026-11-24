@@ -216,9 +216,10 @@ def report(folder, output, limit=None):
         '<title>Slide review report</title><style>body{max-width:1000px;margin:2rem auto;padding:0 1rem;'
         'font:16px system-ui;color:#142d50}img{display:block;width:min(100%,850px);margin:1rem 0}'
         '.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}article{border-top:1px solid #cbd9e8;margin-top:1.5rem}</style>'
-        '<h1>Slide review</h1><a href="alerts.csv">Download alerts CSV</a>'
-        f'<p>{len(cards)} slides reviewed | {processed} processed | {reused} resumed | {len(errors)} unreadable</p>'
-        + review + body + (f"<h2>Unreadable slides</h2><ul>{failures}</ul>" if errors else ""),
+        '<h1>Slide Quality Review</h1><p>Check each flagged region, choose a decision, then download the rescan list.</p>'
+        + review + '<details id="slide-overview"><summary>Slide overview and detector results</summary><p><a href="alerts.csv">Download all detector alerts (CSV)</a></p>'
+        + f'<p>{len(cards)} slides reviewed | {processed} processed | {reused} resumed | {len(errors)} unreadable</p>'
+        + body + "</details>" + (f"<h2>Unreadable slides</h2><ul>{failures}</ul>" if errors else ""),
         encoding="utf-8",
     )
     return len(cards), len(errors)

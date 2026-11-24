@@ -1,33 +1,79 @@
-<section id="region-review" hidden><h2>Review a region</h2><p id="region-title"></p>
-<a id="native" target="_blank" rel="noopener"><img id="region-image" alt="Native-resolution tissue region"></a>
-<label>Decision <select id="decision"><option value="">Pending</option><option>Accept</option><option>Rescan</option><option>Manual review</option></select></label>
-<button id="next">Next region</button> <button id="download-review">Save review JSON</button> <button id="download-rescan">Export rescan CSV</button>
-<label>Reopen review <input type="file" id="restore-review" accept=".json"></label><p id="review-status" role="status"></p></section>
+<style>
+#review-workspace{border:1px solid #cbd9e8;border-radius:16px;background:#f5f8fc;padding:clamp(1rem,3vw,2rem)}
+#review-workspace h2{margin:0 0 .45rem}.review-actions,.review-nav{display:flex;flex-wrap:wrap;gap:.6rem;margin:.8rem 0}
+#review-workspace button{font:inherit;padding:.55rem .85rem;border:1px solid #91a7bf;border-radius:8px;background:white;color:#142d50;cursor:pointer}
+#review-workspace button[aria-pressed=true],#review-workspace #download-rescan:not(:disabled){background:#142d50;color:white}
+#review-workspace button:disabled{opacity:.55;cursor:default}
+#review-workspace :focus-visible{outline:3px solid #2876a8;outline-offset:3px}
+#review-workspace img{width:min(100%,380px);height:auto;border-radius:6px;margin:.6rem 0}
+#review-workspace details{margin-top:1rem}summary{cursor:pointer}.lab-status{color:#445973}
+</style>
+<div id="review-workspace">
+<section id="region-review" hidden>
+<h2 id="region-step">Review flagged regions</h2>
+<p id="review-progress" class="lab-status" aria-live="polite"></p>
+<p id="region-title"></p>
+<a id="native" target="_blank" rel="noopener"><img id="region-image" alt="Tissue region flagged for possible blur">Open full-size image</a>
+<p><strong>Does this region need a new scan?</strong></p>
+<div class="review-actions" role="group" aria-label="Decision for this region">
+<button type="button" data-choice="Accept" aria-pressed="false">Keep</button>
+<button type="button" data-choice="Rescan" aria-pressed="false">Rescan</button>
+<button type="button" data-choice="Manual review" aria-pressed="false">Unsure</button>
+</div>
+<p id="current-decision" class="lab-status"></p>
+<div class="review-nav"><button id="previous">Previous</button><button id="next">Next region</button></div>
+<button id="download-rescan">Download rescan list (CSV)</button>
+<details><summary>Save or reopen review</summary>
+<p>Decisions are saved in this browser. Download a copy to continue on another device.</p>
+<button id="download-review">Download decisions (JSON)</button>
+<label>Import saved decisions <input type="file" id="restore-review" accept=".json"></label>
+<p id="review-status" role="status"></p></details>
+</section>
+<p id="no-regions" hidden>No regions were flagged in the sampled areas.</p>
+</div>
 <script>
 const regions=REGION_DATA, panel=document.querySelector("#region-review");
 const node=id=>document.getElementById(id);
 const storage="slide-review:"+location.pathname;
 let decisions={}, active=0;
+const labels={Accept:"Keep",Rescan:"Rescan","Manual review":"Unsure"};
+const choices=document.querySelectorAll("[data-choice]");
 try { decisions=JSON.parse(localStorage.getItem(storage)||"{}"); } catch {}
 function remember(){try{localStorage.setItem(storage,JSON.stringify(decisions));}catch{}}
 function view(){
-  if(!regions.length)return;
+  if(!regions.length){node("no-regions").hidden=false;return;}
   panel.hidden=false;
   const i=regions.findIndex(row=>"#"+row.id===location.hash);
   if(i>=0)active=i;
   const row=regions[active];
   node("region-title").textContent=row.slide+" | level-zero coordinates ("+row.x+", "+row.y+")";
   node("native").href=node("region-image").src=row.id;
-  node("decision").value=decisions[row.id]||"";
+  node("region-step").textContent="Region "+(active+1)+" of "+regions.length;
+  updateDecision();
+  node("previous").disabled=active===0;
   node("next").disabled=active===regions.length-1;
-  if(i>=0) panel.scrollIntoView();
+
 }
 function download(name,value,type){
   const a=document.createElement("a");
   a.href=URL.createObjectURL(new Blob([value],{type}));a.download=name;a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 }
-node("decision").onchange=e=>{decisions[regions[active].id]=e.target.value;remember();};
+function updateDecision(){
+  const selected=decisions[regions[active].id];
+  const reviewed=regions.filter(r=>labels[decisions[r.id]]).length;
+  const rescans=regions.filter(r=>decisions[r.id]==="Rescan").length;
+  for(const button of choices) button.setAttribute("aria-pressed",button.dataset.choice===selected);
+  node("current-decision").textContent=selected?"Saved: "+labels[selected]:"Awaiting decision";
+  node("review-progress").textContent=reviewed+" of "+regions.length+" reviewed";
+  node("download-rescan").disabled=rescans===0;
+  node("download-rescan").textContent="Download rescan list (CSV)"+(rescans?" · "+rescans:"");
+}
+for(const button of choices) button.onclick=()=>{
+  decisions[regions[active].id]=button.dataset.choice;
+  remember();updateDecision();
+};
+node("previous").onclick=()=>{if(active>0) location.hash=regions[active-1].id;};
 node("next").onclick=()=>{if(active+1<regions.length) location.hash=regions[active+1].id;};
 node("download-review").onclick=()=>download("review.json",JSON.stringify(decisions,null,2),"application/json");
 node("download-rescan").onclick=()=>{
@@ -42,5 +88,6 @@ node("restore-review").onchange=async e=>{
     remember();view();node("review-status").textContent="Review restored.";
   }catch{node("review-status").textContent="Could not read review JSON.";}
 };
+document.querySelector("#slide-overview")?.addEventListener("click",event=>{if(event.target.closest('a[href^="#"]'))panel.scrollIntoView();});
 window.addEventListener("hashchange",view);view();
 </script>
