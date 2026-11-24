@@ -1,10 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" role="img" aria-label="Microscopy tile grid with flagged focus regions and review decisions">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" role="img" aria-label="Glass microscope slide with a stained tissue section">
+<defs><linearGradient id="glass" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#f0f8ff"/><stop offset=".58" stop-color="#c5d9e9"/><stop offset="1" stop-color="#e5eff7"/></linearGradient><pattern id="cells" width="19" height="13" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="#8c466e"/><circle cx="12" cy="8" r="1.9" fill="#a75c85"/><circle cx="17" cy="2" r="1" fill="#b5779b"/></pattern><path id="section" d="M-52-17Q-29-32-8-19T32-17Q64-24 91-8T120 8Q104 32 75 22T33 24Q11 33-13 24T-44 20Q-63 13-52-17Z"/></defs>
 <rect width="800" height="220" fill="#142d50"/>
-<rect x="150" y="42" width="198" height="136" rx="11" fill="#213f61" stroke="#9bbcd1" stroke-width="2"/>
-<path d="M167 140c37-66 63-64 81-47s28 48 84 4v62H167Z" fill="#c28caa"/>
-<path d="M167 74h165m-165 29h165m-165 29h165m-165 29h165M200 60v101m33-101v101m33-101v101m33-101v101" stroke="#e4b3ca" opacity=".7"/>
-<rect x="233" y="103" width="66" height="58" fill="#f1bc6c55" stroke="#f1bc6c" stroke-width="3"/>
-<path d="M363 110h85m-10-7 10 7-10 7" fill="none" stroke="#a6ccdf" stroke-width="3"/>
-<g fill="#213f61" stroke="#9bbcd1"><rect x="474" y="52" width="170" height="48" rx="8"/><rect x="474" y="121" width="170" height="48" rx="8"/></g>
-<path d="m491 75 8 8 15-16m-23 78h23m17-72h87m-87 70h62" fill="none" stroke="#94d6ca" stroke-width="3"/>
-</svg>
+<g transform="translate(397 111) rotate(-11)">
+<rect x="-169" y="-52" width="338" height="104" rx="9" fill="#0c1c32" transform="translate(0 7)"/>
+<rect x="-169" y="-52" width="338" height="104" rx="9" fill="url(#glass)" stroke="#88adc8" stroke-width="2.5"/>
+<rect x="-159" y="-43" width="318" height="86" rx="6" fill="none" stroke="#fff" opacity=".8"/>
+<path d="M-81-51V51" stroke="#a4b9cb"/>
+<rect x="-154" y="-39" width="65" height="78" rx="3" fill="#f6f4eb"/>
+<path d="M-142-23h39m-39 8h29m-29 34h39" stroke="#8594a1" stroke-width="2" stroke-linecap="round"/>
+<path d="M-142-2v14m4-14v14m6-14v14m3-14v14m7-14v14m5-14v14m4-14v14" stroke="#526782" stroke-width="2"/>
+<use href="#section" fill="#dc9fbc" stroke="#b26993" stroke-width="2"/><use href="#section" fill="url(#cells)" opacity=".65"/>
+<path d="M-35 9q12-17 30-8t32 2m18 5q10-11 27-5t21-1" fill="none" stroke="#f4cee0" stroke-width="5" stroke-linecap="round"/>
+<rect x="48" y="-15" width="42" height="35" rx="2" fill="none" stroke="#9e572f" stroke-width="2" stroke-dasharray="4 3"/>
+</g></svg>

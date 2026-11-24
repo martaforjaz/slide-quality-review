@@ -1,4 +1,4 @@
-import { scan, csv, patchAlert } from "./quality.mjs";
+import { scan, csv, patchAlert, combinedAlert } from "./quality.mjs?v=focus2";
 const get=id=>document.getElementById(id);
 const canvas=get("canvas"), ctx=canvas.getContext("2d",{willReadFrequently:true});
 let rows=[], active, overlay=true, busy=false;
@@ -6,6 +6,7 @@ const limit=()=>Number(get("threshold").value);
 const flagged=row=>row.tiles.filter(t=>t.ratio<limit());
 const scannerAlert=row=>get("mode").value==="baseline"
   ? (row.tiles.length ? row.tiles.some(tile=>tile.ratio<.20) : null)
+  : get("mode").value==="combined" ? combinedAlert(row.tiles,row.source.model)
   : patchAlert(row.tiles,row.source.threshold);
 async function add(name,src,source) {
   const image=new Image(); image.src=src; await image.decode();
@@ -65,10 +66,10 @@ get("example").onclick=async()=>{
   if(rows.some(row=>row.source))return;
   get("status").textContent="Loading scanner examples…";
   try{
-    const response=await fetch("scanner-demo.json");
+    const response=await fetch("scanner-demo-v2.json");
     if(!response.ok)throw Error();
     const dataset=await response.json();
-    await load(dataset.examples.map((row,i)=>({name:"TCGA "+(i+1)+" · "+row.organ,src:row.src,source:{threshold:dataset.threshold,label:row.label}})));
+    await load(dataset.examples.map((row,i)=>({name:"TCGA "+(i+1)+" · "+row.organ,src:row.src,source:{threshold:dataset.threshold,model:dataset.model,label:row.label}})));
   }catch{get("status").textContent="Scanner examples could not be loaded.";}
 };
 get("files").onchange=e=>{void load([...e.target.files].slice(0,30).map(f=>({name:f.name,src:URL.createObjectURL(f),revoke:true})));e.target.value="";};

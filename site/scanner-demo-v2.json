@@ -1,0 +1,73 @@
+{
+  "examples": [
+    {
+      "src": "scanner-holdout-03.png",
+      "organ": "Thymus",
+      "label": "Out of Focus",
+      "source_member": "TCGA@Focus/Image Patches Database/Out of Focus/Thymus/TCGA-4V-A9QW-01Z-00-DX1.AE4B6F79-56F4-4E48-B5B5-0709ACC991B1/patch_i_18123_j_60925.png"
+    },
+    {
+      "src": "scanner-holdout-00.png",
+      "organ": "Thymus",
+      "label": "In Focus",
+      "source_member": "TCGA@Focus/Image Patches Database/In Focus/Thymus/TCGA-4V-A9QT-01A-01-TS1.39A50AAE-5E17-4FDD-87A5-DA4B86138629/patch_i_11588_j_60795.png"
+    },
+    {
+      "src": "scanner-holdout-16.png",
+      "organ": "Stomach",
+      "label": "In Focus",
+      "source_member": "TCGA@Focus/Image Patches Database/In Focus/Stomach/TCGA-BR-8687-01A-01-TS1.184ca602-82a9-4a63-bd7d-f813e6ab84fa/patch_i_53305_j_54741.png"
+    },
+    {
+      "src": "scanner-holdout-02.png",
+      "organ": "Thymus",
+      "label": "Out of Focus",
+      "source_member": "TCGA@Focus/Image Patches Database/Out of Focus/Thymus/TCGA-4X-A9F9-01A-01-TSA.02746AE8-C355-40D5-8628-E3657960AC64/patch_i_4021_j_58442.png"
+    }
+  ],
+  "model": {
+    "mean": [
+      4.851582893370685,
+      4.426160487998032,
+      0.29828583487947136,
+      0.3944572794316176
+    ],
+    "scale": [
+      1.4592110371841494,
+      1.5523703224783523,
+      0.12789969719746253,
+      0.4113163301727571
+    ],
+    "weights": [
+      -0.5536236157969507,
+      -1.2879934402148792,
+      -0.3724286073554676,
+      1.1383538346061777
+    ],
+    "intercept": 0.09343970886370873
+  },
+  "threshold": 85.78529009316861,
+  "summary": {
+    "original": {
+      "tp": 17,
+      "fp": 7,
+      "tn": 13,
+      "fn": 3,
+      "abstain": 0
+    },
+    "calibrated": {
+      "tp": 16,
+      "fp": 1,
+      "tn": 19,
+      "fn": 4,
+      "abstain": 0
+    },
+    "combined": {
+      "tp": 18,
+      "fp": 1,
+      "tn": 19,
+      "fn": 2,
+      "abstain": 0
+    }
+  }
+}

@@ -1,0 +1,322 @@
+[
+  {
+    "split": "test",
+    "organ": "Thymus",
+    "label": "In Focus",
+    "slide": "TCGA-4V-A9QT-01A-01-TS1.39A50AAE-5E17-4FDD-87A5-DA4B86138629",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Thymus/TCGA-4V-A9QT-01A-01-TS1.39A50AAE-5E17-4FDD-87A5-DA4B86138629/patch_i_11588_j_60795.png",
+    "file": "holdout-00.png"
+  },
+  {
+    "split": "test",
+    "organ": "Thymus",
+    "label": "In Focus",
+    "slide": "TCGA-X7-A8D7-01Z-00-DX1.6CD17052-2C11-46BC-9285-CF1AE2E9F062",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Thymus/TCGA-X7-A8D7-01Z-00-DX1.6CD17052-2C11-46BC-9285-CF1AE2E9F062/patch_i_45494_j_105083.png",
+    "file": "holdout-01.png"
+  },
+  {
+    "split": "test",
+    "organ": "Thymus",
+    "label": "Out of Focus",
+    "slide": "TCGA-4X-A9F9-01A-01-TSA.02746AE8-C355-40D5-8628-E3657960AC64",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Thymus/TCGA-4X-A9F9-01A-01-TSA.02746AE8-C355-40D5-8628-E3657960AC64/patch_i_4021_j_58442.png",
+    "file": "holdout-02.png"
+  },
+  {
+    "split": "test",
+    "organ": "Thymus",
+    "label": "Out of Focus",
+    "slide": "TCGA-4V-A9QW-01Z-00-DX1.AE4B6F79-56F4-4E48-B5B5-0709ACC991B1",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Thymus/TCGA-4V-A9QW-01Z-00-DX1.AE4B6F79-56F4-4E48-B5B5-0709ACC991B1/patch_i_18123_j_60925.png",
+    "file": "holdout-03.png"
+  },
+  {
+    "split": "test",
+    "organ": "Uterus NOS",
+    "label": "In Focus",
+    "slide": "TCGA-3B-A9I1-01A-01-TS1.D5A4C7EE-A821-4792-A417-B6D06572DB25",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Uterus NOS/TCGA-3B-A9I1-01A-01-TS1.D5A4C7EE-A821-4792-A417-B6D06572DB25/patch_i_13931_j_7789.png",
+    "file": "holdout-04.png"
+  },
+  {
+    "split": "test",
+    "organ": "Uterus NOS",
+    "label": "In Focus",
+    "slide": "TCGA-IW-A3M5-01A-02-TSB.B3F3EFFF-E89A-4091-8ADB-0A5CDB8221E4",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Uterus NOS/TCGA-IW-A3M5-01A-02-TSB.B3F3EFFF-E89A-4091-8ADB-0A5CDB8221E4/patch_i_8427_j_79643.png",
+    "file": "holdout-05.png"
+  },
+  {
+    "split": "test",
+    "organ": "Uterus NOS",
+    "label": "Out of Focus",
+    "slide": "TCGA-N5-A4RJ-01A-01-TSA.D0E5A491-2A73-460A-B78D-FC3994EDAB2C",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Uterus NOS/TCGA-N5-A4RJ-01A-01-TSA.D0E5A491-2A73-460A-B78D-FC3994EDAB2C/patch_i_10695_j_12575.png",
+    "file": "holdout-06.png"
+  },
+  {
+    "split": "test",
+    "organ": "Uterus NOS",
+    "label": "Out of Focus",
+    "slide": "TCGA-N5-A4R8-01Z-00-DX1.1E2F2A7A-9807-404D-B563-5E9BF8530E1E",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Uterus NOS/TCGA-N5-A4R8-01Z-00-DX1.1E2F2A7A-9807-404D-B563-5E9BF8530E1E/patch_i_24972_j_16261.png",
+    "file": "holdout-07.png"
+  },
+  {
+    "split": "test",
+    "organ": "Rectum",
+    "label": "In Focus",
+    "slide": "TCGA-AG-A01N-01A-02-TS2.7d2c707a-0f6b-492c-9fe5-501ef9569aae",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Rectum/TCGA-AG-A01N-01A-02-TS2.7d2c707a-0f6b-492c-9fe5-501ef9569aae/patch_i_21060_j_122513.png",
+    "file": "holdout-08.png"
+  },
+  {
+    "split": "test",
+    "organ": "Rectum",
+    "label": "In Focus",
+    "slide": "TCGA-AG-A016-01A-01-TS1.4cc75c31-0866-4dbf-95fa-afc40726e5c9",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Rectum/TCGA-AG-A016-01A-01-TS1.4cc75c31-0866-4dbf-95fa-afc40726e5c9/patch_i_10250_j_8870.png",
+    "file": "holdout-09.png"
+  },
+  {
+    "split": "test",
+    "organ": "Rectum",
+    "label": "Out of Focus",
+    "slide": "TCGA-AG-A00C-01A-01-BS1.e8c5cac1-c0cc-455d-8e07-7ce855c8ef0f",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Rectum/TCGA-AG-A00C-01A-01-BS1.e8c5cac1-c0cc-455d-8e07-7ce855c8ef0f/patch_i_7106_j_6801.png",
+    "file": "holdout-10.png"
+  },
+  {
+    "split": "test",
+    "organ": "Rectum",
+    "label": "Out of Focus",
+    "slide": "TCGA-AG-A011-01A-01-TS1.12836689-46d5-4d66-ada5-3de7f942cd0c",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Rectum/TCGA-AG-A011-01A-01-TS1.12836689-46d5-4d66-ada5-3de7f942cd0c/patch_i_14919_j_3775.png",
+    "file": "holdout-11.png"
+  },
+  {
+    "split": "test",
+    "organ": "Ovary",
+    "label": "In Focus",
+    "slide": "TCGA-23-2079-01Z-00-DX1.01383205-B7A7-4529-9207-880687650A50",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Ovary/TCGA-23-2079-01Z-00-DX1.01383205-B7A7-4529-9207-880687650A50/patch_i_8888_j_85226.png",
+    "file": "holdout-12.png"
+  },
+  {
+    "split": "test",
+    "organ": "Ovary",
+    "label": "In Focus",
+    "slide": "TCGA-09-1668-01B-01-TS1.a922c1f1-847e-4396-b785-63799e47fc94",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Ovary/TCGA-09-1668-01B-01-TS1.a922c1f1-847e-4396-b785-63799e47fc94/patch_i_9128_j_7927.png",
+    "file": "holdout-13.png"
+  },
+  {
+    "split": "test",
+    "organ": "Ovary",
+    "label": "Out of Focus",
+    "slide": "TCGA-23-2081-01Z-00-DX1.4105A382-4C2B-4C62-AC93-CB21CC360254",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Ovary/TCGA-23-2081-01Z-00-DX1.4105A382-4C2B-4C62-AC93-CB21CC360254/patch_i_48324_j_18134.png",
+    "file": "holdout-14.png"
+  },
+  {
+    "split": "test",
+    "organ": "Ovary",
+    "label": "Out of Focus",
+    "slide": "TCGA-24-1464-01A-01-TS1.33baf922-5467-4b79-8191-fbba9f70c972",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Ovary/TCGA-24-1464-01A-01-TS1.33baf922-5467-4b79-8191-fbba9f70c972/patch_i_10580_j_1885.png",
+    "file": "holdout-15.png"
+  },
+  {
+    "split": "test",
+    "organ": "Stomach",
+    "label": "In Focus",
+    "slide": "TCGA-BR-8687-01A-01-TS1.184ca602-82a9-4a63-bd7d-f813e6ab84fa",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Stomach/TCGA-BR-8687-01A-01-TS1.184ca602-82a9-4a63-bd7d-f813e6ab84fa/patch_i_53305_j_54741.png",
+    "file": "holdout-16.png"
+  },
+  {
+    "split": "test",
+    "organ": "Stomach",
+    "label": "In Focus",
+    "slide": "TCGA-B7-A5TI-01A-01-TSA.EE4B83F4-27AD-4D83-AEAC-A452A5EC85F8",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Stomach/TCGA-B7-A5TI-01A-01-TSA.EE4B83F4-27AD-4D83-AEAC-A452A5EC85F8/patch_i_7139_j_19693.png",
+    "file": "holdout-17.png"
+  },
+  {
+    "split": "test",
+    "organ": "Stomach",
+    "label": "Out of Focus",
+    "slide": "TCGA-BR-8367-01A-01-TS1.e1339a6a-ba5e-4aed-95b8-64c45812ec16",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Stomach/TCGA-BR-8367-01A-01-TS1.e1339a6a-ba5e-4aed-95b8-64c45812ec16/patch_i_59425_j_24075.png",
+    "file": "holdout-18.png"
+  },
+  {
+    "split": "test",
+    "organ": "Stomach",
+    "label": "Out of Focus",
+    "slide": "TCGA-BR-A452-01A-09-TSI.BD3971E5-7F5A-4798-AA61-67CBFBCB01C8",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Stomach/TCGA-BR-A452-01A-09-TSI.BD3971E5-7F5A-4798-AA61-67CBFBCB01C8/patch_i_7655_j_53610.png",
+    "file": "holdout-19.png"
+  },
+  {
+    "split": "test",
+    "organ": "Esophagus",
+    "label": "In Focus",
+    "slide": "TCGA-L5-A88Z-01A-01-TS1.5251875D-7BB0-4F51-8281-32E8237AEA2B",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Esophagus/TCGA-L5-A88Z-01A-01-TS1.5251875D-7BB0-4F51-8281-32E8237AEA2B/patch_i_12993_j_75083.png",
+    "file": "holdout-20.png"
+  },
+  {
+    "split": "test",
+    "organ": "Esophagus",
+    "label": "In Focus",
+    "slide": "TCGA-L5-A4OT-01Z-00-DX1.23F2765D-7674-49EB-A932-5D63A0A2E551",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Esophagus/TCGA-L5-A4OT-01Z-00-DX1.23F2765D-7674-49EB-A932-5D63A0A2E551/patch_i_59525_j_57988.png",
+    "file": "holdout-21.png"
+  },
+  {
+    "split": "test",
+    "organ": "Esophagus",
+    "label": "Out of Focus",
+    "slide": "TCGA-2H-A9GO-01Z-00-DX1.A3AEE5BB-3825-49B4-8F7B-B2CB9015515A",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Esophagus/TCGA-2H-A9GO-01Z-00-DX1.A3AEE5BB-3825-49B4-8F7B-B2CB9015515A/patch_i_3118_j_38768.png",
+    "file": "holdout-22.png"
+  },
+  {
+    "split": "test",
+    "organ": "Esophagus",
+    "label": "Out of Focus",
+    "slide": "TCGA-IG-A625-01Z-00-DX1.48DC96DA-6573-4AA3-898A-44B8B55C7451",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Esophagus/TCGA-IG-A625-01Z-00-DX1.48DC96DA-6573-4AA3-898A-44B8B55C7451/patch_i_32461_j_2991.png",
+    "file": "holdout-23.png"
+  },
+  {
+    "split": "test",
+    "organ": "Tonsil",
+    "label": "In Focus",
+    "slide": "TCGA-BB-7866-01A-01-BS1.670d9e30-c815-4f6f-a285-55cd9bfc0dcc",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Tonsil/TCGA-BB-7866-01A-01-BS1.670d9e30-c815-4f6f-a285-55cd9bfc0dcc/patch_i_15989_j_16791.png",
+    "file": "holdout-24.png"
+  },
+  {
+    "split": "test",
+    "organ": "Tonsil",
+    "label": "In Focus",
+    "slide": "TCGA-BB-7866-01Z-00-DX1.144872E0-8C08-42CC-ACDD-45D28F35517D",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Tonsil/TCGA-BB-7866-01Z-00-DX1.144872E0-8C08-42CC-ACDD-45D28F35517D/patch_i_35145_j_76337.png",
+    "file": "holdout-25.png"
+  },
+  {
+    "split": "test",
+    "organ": "Tonsil",
+    "label": "Out of Focus",
+    "slide": "TCGA-BB-7866-01A-01-TS1.01c0b2a8-20f2-4d1a-9e5b-91a069f9f794",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Tonsil/TCGA-BB-7866-01A-01-TS1.01c0b2a8-20f2-4d1a-9e5b-91a069f9f794/patch_i_12905_j_18888.png",
+    "file": "holdout-26.png"
+  },
+  {
+    "split": "test",
+    "organ": "Tonsil",
+    "label": "Out of Focus",
+    "slide": "TCGA-DQ-7596-01Z-00-DX1.83133BB5-B039-4D11-A9BC-20B6C70D0BD2",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Tonsil/TCGA-DQ-7596-01Z-00-DX1.83133BB5-B039-4D11-A9BC-20B6C70D0BD2/patch_i_40048_j_166892.png",
+    "file": "holdout-27.png"
+  },
+  {
+    "split": "test",
+    "organ": "Floor of Mouth",
+    "label": "In Focus",
+    "slide": "TCGA-CV-7102-01Z-00-DX1.AA1016D3-86C8-41E4-BF90-6E86C1D606E5",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Floor of Mouth/TCGA-CV-7102-01Z-00-DX1.AA1016D3-86C8-41E4-BF90-6E86C1D606E5/patch_i_25320_j_57813.png",
+    "file": "holdout-28.png"
+  },
+  {
+    "split": "test",
+    "organ": "Floor of Mouth",
+    "label": "In Focus",
+    "slide": "TCGA-BA-A6D8-01A-03-TSC.213FC143-46ED-411E-878D-5D5A9B321183",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Floor of Mouth/TCGA-BA-A6D8-01A-03-TSC.213FC143-46ED-411E-878D-5D5A9B321183/patch_i_7740_j_10903.png",
+    "file": "holdout-29.png"
+  },
+  {
+    "split": "test",
+    "organ": "Floor of Mouth",
+    "label": "Out of Focus",
+    "slide": "TCGA-CQ-A4CB-01A-01-TSA.CE448D27-EF49-436C-8FBD-4E52F9D92AD0",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Floor of Mouth/TCGA-CQ-A4CB-01A-01-TSA.CE448D27-EF49-436C-8FBD-4E52F9D92AD0/patch_i_20538_j_31685.png",
+    "file": "holdout-30.png"
+  },
+  {
+    "split": "test",
+    "organ": "Floor of Mouth",
+    "label": "Out of Focus",
+    "slide": "TCGA-CV-6948-01Z-00-DX1.5FBC4FBA-681D-45AB-BE39-3976CED6A550",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Floor of Mouth/TCGA-CV-6948-01Z-00-DX1.5FBC4FBA-681D-45AB-BE39-3976CED6A550/patch_i_75893_j_19173.png",
+    "file": "holdout-31.png"
+  },
+  {
+    "split": "test",
+    "organ": "Oropharynx",
+    "label": "In Focus",
+    "slide": "TCGA-QK-A8ZA-01A-01-TS1.1E387320-155A-4E7E-BC5F-F4153913C146",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Oropharynx/TCGA-QK-A8ZA-01A-01-TS1.1E387320-155A-4E7E-BC5F-F4153913C146/patch_i_8601_j_68760.png",
+    "file": "holdout-32.png"
+  },
+  {
+    "split": "test",
+    "organ": "Oropharynx",
+    "label": "In Focus",
+    "slide": "TCGA-BA-A4IG-01A-01-TS1.CC1EF955-6350-45EB-ADBE-A2E206602FC1",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Oropharynx/TCGA-BA-A4IG-01A-01-TS1.CC1EF955-6350-45EB-ADBE-A2E206602FC1/patch_i_11375_j_57551.png",
+    "file": "holdout-33.png"
+  },
+  {
+    "split": "test",
+    "organ": "Oropharynx",
+    "label": "Out of Focus",
+    "slide": "TCGA-BA-A8YP-01Z-00-DX1.03B95E63-2639-49F6-B8DD-AC2C2FA872B1",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Oropharynx/TCGA-BA-A8YP-01Z-00-DX1.03B95E63-2639-49F6-B8DD-AC2C2FA872B1/patch_i_8282_j_132559.png",
+    "file": "holdout-34.png"
+  },
+  {
+    "split": "test",
+    "organ": "Oropharynx",
+    "label": "Out of Focus",
+    "slide": "TCGA-MZ-A6I9-01A-01-TS1.83A1A06C-9D5E-4E7A-AC5E-59C50DB7051E",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Oropharynx/TCGA-MZ-A6I9-01A-01-TS1.83A1A06C-9D5E-4E7A-AC5E-59C50DB7051E/patch_i_5017_j_11726.png",
+    "file": "holdout-35.png"
+  },
+  {
+    "split": "test",
+    "organ": "Cervix Uteri",
+    "label": "In Focus",
+    "slide": "TCGA-BI-A0VR-01Z-00-DX1.69847920-5A6E-4318-9AD8-6EC9EECD1B3A",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Cervix Uteri/TCGA-BI-A0VR-01Z-00-DX1.69847920-5A6E-4318-9AD8-6EC9EECD1B3A/patch_i_19802_j_95655.png",
+    "file": "holdout-36.png"
+  },
+  {
+    "split": "test",
+    "organ": "Cervix Uteri",
+    "label": "In Focus",
+    "slide": "TCGA-EK-A2PG-01A-01-TS1.947E376D-3124-456D-9CA3-0074D9A30492",
+    "member": "TCGA@Focus/Image Patches Database/In Focus/Cervix Uteri/TCGA-EK-A2PG-01A-01-TS1.947E376D-3124-456D-9CA3-0074D9A30492/patch_i_10545_j_10416.png",
+    "file": "holdout-37.png"
+  },
+  {
+    "split": "test",
+    "organ": "Cervix Uteri",
+    "label": "Out of Focus",
+    "slide": "TCGA-C5-A901-01A-01-TS1.27FDA5E0-E09F-4688-A36F-665532E93D58",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Cervix Uteri/TCGA-C5-A901-01A-01-TS1.27FDA5E0-E09F-4688-A36F-665532E93D58/patch_i_29304_j_86169.png",
+    "file": "holdout-38.png"
+  },
+  {
+    "split": "test",
+    "organ": "Cervix Uteri",
+    "label": "Out of Focus",
+    "slide": "TCGA-DS-A1OB-01A-01-TSA.dced2292-a317-40af-b7fc-c19ac5067d5b",
+    "member": "TCGA@Focus/Image Patches Database/Out of Focus/Cervix Uteri/TCGA-DS-A1OB-01A-01-TSA.dced2292-a317-40af-b7fc-c19ac5067d5b/patch_i_11897_j_59496.png",
+    "file": "holdout-39.png"
+  }
+]

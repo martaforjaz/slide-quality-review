@@ -70,3 +70,22 @@ OpenSlide must recognize the scanner format. The reader selects a pyramid level 
 ![Public microscopy TIFF sample with an alert over injected defocus](figures/public-tiff-alert.png)
 
 This example generates two tiled TIFFs from the public scikit-image micrograph: a reference and a copy with simulated blur in one grid cell. Run `pip install tifffile` and `python public_folder_example.py` to generate the input folder, PNG previews, HTML report and CSV locally. The [example CSV](figures/public-tiff-alerts.csv) reports the flagged region in level-zero coordinates. This checks the folder workflow on a controlled image; the TCGA@Focus experiment above evaluates real scanner defocus separately.
+
+## Expanded scanner validation
+
+![Blur found and false alerts on 40 additional scanner patches](site/scanner-holdout.png)
+
+The combined detector found **18 of 20 blurred patches** and gave **one false alert in 20 clear patches**. On the same images, the original found 17 and gave seven false alerts. The earlier calibrated detector found 16 and gave one false alert.
+
+The new detector fits a logistic model to four features derived from the distribution of tissue-tile Laplacian and gradient energy. It uses the original 40 slides for fitting and **40 previously unseen slides** for evaluation, with one annotated patch per slide. The operating threshold is the standard logistic decision boundary. [Results and per-patch predictions](holdout-results.json) · [Holdout manifest](holdout.json)
+
+The combined score is available in the public TCGA@Focus example batch. Whole-slide folder reviews and local overlays continue to use their own relative scoring workflow. This test measures patch-level alerts within TCGA@Focus, with no cross-scanner or whole-slide validation.
+
+After acquiring the original cohort, install scikit-learn and run:
+
+```sh
+python acquire_holdout.py
+node score_holdout.mjs
+python train_focus.py
+python render_holdout.py
+```
