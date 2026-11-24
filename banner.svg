@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" role="img" aria-label="Glass microscope slide with a stained tissue section">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" role="img" aria-label="Glass microscope slide leading to a focus map with highlighted review regions">
 <defs><linearGradient id="glass" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#f0f8ff"/><stop offset=".58" stop-color="#c5d9e9"/><stop offset="1" stop-color="#e5eff7"/></linearGradient><pattern id="cells" width="19" height="13" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="#8c466e"/><circle cx="12" cy="8" r="1.9" fill="#a75c85"/><circle cx="17" cy="2" r="1" fill="#b5779b"/></pattern><path id="section" d="M-52-17Q-29-32-8-19T32-17Q64-24 91-8T120 8Q104 32 75 22T33 24Q11 33-13 24T-44 20Q-63 13-52-17Z"/></defs>
 <rect width="800" height="220" fill="#142d50"/>
-<g transform="translate(397 111) rotate(-11)">
+<g transform="translate(246 111) rotate(-11) scale(.84)">
 <rect x="-169" y="-52" width="338" height="104" rx="9" fill="#0c1c32" transform="translate(0 7)"/>
 <rect x="-169" y="-52" width="338" height="104" rx="9" fill="url(#glass)" stroke="#88adc8" stroke-width="2.5"/>
 <rect x="-159" y="-43" width="318" height="86" rx="6" fill="none" stroke="#fff" opacity=".8"/>
@@ -12,4 +12,11 @@
 <use href="#section" fill="#dc9fbc" stroke="#b26993" stroke-width="2"/><use href="#section" fill="url(#cells)" opacity=".65"/>
 <path d="M-35 9q12-17 30-8t32 2m18 5q10-11 27-5t21-1" fill="none" stroke="#f4cee0" stroke-width="5" stroke-linecap="round"/>
 <rect x="48" y="-15" width="42" height="35" rx="2" fill="none" stroke="#9e572f" stroke-width="2" stroke-dasharray="4 3"/>
-</g></svg>
+</g><path d="M401 112h78m-13-8 13 8-13 8" fill="none" stroke="#b6d4e7" stroke-width="3"/>
+<rect x="502" y="44" width="191" height="132" rx="11" fill="#1d3c5b" stroke="#9cc3d8" stroke-width="2"/>
+<rect x="514" y="56" width="167" height="96" rx="4" fill="#eee6ee"/>
+<path d="M520 110q18-46 38-20t35-8q25-21 45 1t37 21v38H520Z" fill="#b980a3"/>
+<path d="M514 80h167m-167 24h167m-167 24h167m-125-72v96m41-96v96m42-96v96" stroke="#fff" opacity=".65"/>
+<g fill="#edb371" fill-opacity=".21" stroke="#e69c54" stroke-width="2.5"><rect x="556" y="104" width="41" height="24"/><rect x="597" y="80" width="42" height="24"/></g>
+<circle cx="522" cy="165" r="3" fill="#e69c54"/><path d="M533 165h44m12 0h24" stroke="#9cc3d8" stroke-width="2" stroke-linecap="round"/>
+</svg>

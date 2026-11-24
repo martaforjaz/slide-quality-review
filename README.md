@@ -89,3 +89,5 @@ node score_holdout.mjs
 python train_focus.py
 python render_holdout.py
 ```
+
+The folder report shows original and combined alerts side by side. Both methods read the same sampled windows. The combined score applies the public TCGA@Focus model to 64-pixel subtiles within each window, and the CSV marks regions flagged by either method along with their coordinates and scores. The TCGA patch benchmark does not validate this application across WSI scanners and magnifications. Use the paired previews for manual review.
