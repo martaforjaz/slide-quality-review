@@ -95,3 +95,15 @@ The folder report shows original and combined alerts side by side. Both methods 
 ## Aggregate comparison on a separate WSI batch
 
 Across seven 40× slides, the original detector flagged **18 of 255** sampled tissue regions. The combined detector flagged **98 of the same 255**, including all 18 original alerts. These slides had no reference focus annotations. The counts measure review workload and agreement between the detectors.
+
+## Public whole-slide example on PLISM
+
+On the public **MY_P.tiff** whole slide, the original detector flagged **11 of 145** sampled tissue regions, and the combined detector flagged **5 of 145**. All five combined alerts overlap the original alerts. PLISM does not provide reference focus labels for this comparison, so the difference measures review workload on this example.
+
+| Original detector | Combined detector |
+| --- | --- |
+| ![PLISM slide with original alert markers](figures/plism-original-alerts.png) | ![PLISM slide with combined alert markers](figures/plism-combined-alerts.png) |
+
+[Public example CSV](figures/plism-alerts.csv). Download MY_P.tiff from the [PLISM Original Whole Slide Images Dataset](https://doi.org/10.25452/figshare.plus.24988074.v1) and run `python review_folder.py PATH_TO_PLISM_FOLDER --output plism-report` to regenerate the previews and CSV.
+
+Image source: Mieko Ochi, Daisuke Komura and colleagues, PLISM, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The figures show reduced views with added focus-alert outlines.
